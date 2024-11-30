@@ -1,6 +1,6 @@
 const express=require('express')
 const { protectRoute } = require('../middleware/authmiddleware')
-const {getUsersForSidebar,getMessages}=require('../controller/messagecontroller')
+const {getUsersForSidebar,getMessages,sendMessage}=require('../controller/messagecontroller')
 const router=express.Router()
 
 

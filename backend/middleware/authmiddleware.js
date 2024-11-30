@@ -3,7 +3,7 @@ const User=require('../models/usermodel')
 
 
 module.exports.protectRoute=async(req,res,next)=>{
-    const token=req.cookie.JWT
+    const token=req.cookie?.JWT
 
 
     try {

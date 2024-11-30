@@ -2,7 +2,7 @@
 const User=require('../models/usermodel')
 const bcrypt=require('bcryptjs')
 const generateToken=require('../lib/utils')
-const cloudinary=require('../lib/cloudinary')
+const cloudinary=require('../lib/cloudinary').v2
 module.exports.signup=async(req,res)=>{
     const{email,fullname,password,ProfilePic}=req.body
    try {
@@ -114,14 +114,14 @@ module.exports.login=async(req,res)=>{
  
  }
 
-
- module.export.updateprofile=async(req,res)=>{
+ 
+ module.exports.updateprofile=async(req,res)=>{
 
 
      try {
 
         const {ProfilePic}=req.body
-        const userId=req.user._id
+        const userId=req.user?._id
         if(!ProfilePic){
             return res.status(400).json({message:'Invalid user data'})
             
@@ -129,10 +129,16 @@ module.exports.login=async(req,res)=>{
         const uploadResponse=await cloudinary.uploader.upload(ProfilePic)
         const updateUser=await User.findByIdAndUpdate(userId,{ProfilePic:uploadResponse.secure_url},{new:true})
 
-        res.status(200).json(updateUser)
+        if (!updateUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.status(200).json(updateUser);
 
 } catch (error) {
-    
+    console.log("Error in checkAuth Controller",error.message)
+    res.status(500).json({message:"Internal Server Error"})
+   
 }
  }
 

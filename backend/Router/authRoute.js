@@ -1,8 +1,8 @@
 const express=require('express')
 const router=express.Router()
-const {signup,login,logout,checkAuth}=require('../controller/authcontroller')
+const{ signup,login,logout,checkAuth,updateprofile}=require('../controller/authcontroller')
 
-const protectRoute=require('../middleware/authmiddleware')
+const {protectRoute}=require('../middleware/authmiddleware')
 
 
 
