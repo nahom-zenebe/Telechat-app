@@ -1,4 +1,5 @@
 
+
 const mongoose=require('mongoose')
 
 
@@ -27,7 +28,7 @@ const messageSchema=mongoose.Schema({
     },
 
 },{
-    timestamp:true
+    timestamps: true 
 })
 
 

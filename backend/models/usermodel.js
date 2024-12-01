@@ -1,4 +1,5 @@
 
+const { Timestamp } = require('mongodb')
 const mongoose=require('mongoose')
 
 
@@ -27,7 +28,7 @@ const UserSchema=mongoose.Schema({
     },
 
 },{
-    timestamp:true
+   Timestamp:true
 })
 
 
