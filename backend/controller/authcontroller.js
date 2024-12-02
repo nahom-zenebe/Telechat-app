@@ -136,7 +136,7 @@ module.exports.login=async(req,res)=>{
         res.status(200).json(updateUser);
 
 } catch (error) {
-    console.log("Error in checkAuth Controller",error.message)
+    console.log("Error in update profile Controller",error.message)
     res.status(500).json({message:"Internal Server Error"})
    
 }

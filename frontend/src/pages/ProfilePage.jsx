@@ -9,7 +9,7 @@ function ProfilePage() {
 const [selectedImg,setselectedImg]=useState(null)
 
   const handleImageUpload=async(e)=>{
-    const file=e.target.files[0]
+    const file = e.target.files[0];
     if(!file)return
 
     const reader=new FileReader()
@@ -19,7 +19,7 @@ const [selectedImg,setselectedImg]=useState(null)
     reader.onload=async()=>{
       const base64Image=reader.result
       setselectedImg(base64Image)
-      await updateProfile({profilePic:base64Image})
+      await updateProfile({ProfilePic :base64Image})
     }
 
 

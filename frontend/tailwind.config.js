@@ -8,5 +8,6 @@ module.exports = {
     extend: {},
   },
   plugins: [daisyui],
+  daisyui:["light","dark","cupcaks"]
 }
 

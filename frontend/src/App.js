@@ -36,7 +36,7 @@ function App() {
 
 
   return (
-    <div>
+    <div >
       <Navbar/>
     <Routes>
     <Route index element={ authUser ? <HomePage/>:<Navigate to='/login'/>} />
