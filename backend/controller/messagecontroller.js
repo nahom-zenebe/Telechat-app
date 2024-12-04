@@ -20,15 +20,23 @@ module.exports.getMessages=async(req,res)=>{
     try {
         const {id:userToChatId}=req.params
         const myId=req.user._id
-        const messages=await Message.find({
-            $or:[
-                {senderId:myId,reveiverId:userToChatId},
-                {senderId:userToChatId,reveiverId:myId}
 
-            ]
+         
+    const senderId = mongoose.Types.ObjectId(myId);
+    const receiverId = mongoose.Types.ObjectId(userToChatId);
+    console.log(senderId)
+    console.log( receiverId)
+  
+
+        const messages=await Message.find({
+            $or: [
+                { senderId, receiverId },
+                { senderId: receiverId, receiverId: senderId }
+              ]
         })
 
         res.status(200).json(messages)
+       
 
         
     } catch (error) {

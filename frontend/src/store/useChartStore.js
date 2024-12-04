@@ -15,7 +15,7 @@ isMessageLoading:false,
 getUsers:async()=>{
     set({isUserLoading:true})
     try {
-        const res=await axiosInstance.get('/message/users')
+        const res=await axiosInstance.get('/message/user')
         set({users:res.data})
 
 

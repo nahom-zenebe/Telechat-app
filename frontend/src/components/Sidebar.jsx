@@ -28,7 +28,7 @@ function Sidebar() {
                 <span className='font-medium hidden lg:block'>Contacts</span>
 
             </div>
-  {/**/}
+
             </div>
             <div className="overflow-y-auto w-full py-3">
         {users.map((user) => (
