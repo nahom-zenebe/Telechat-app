@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 import {useChartStore} from '../store/useChartStore'
 import SiderbarSkeleton from './skeletons/SiderbarSkeleten'
 import {Users} from 'lucide-react'
+import { useAuthStore } from '../store/useAuthStore'
 function Sidebar() {
 
     const {getUsers,setSelectedUser,selectedUser,users,isUserLoading}=useChartStore()
-    const onlineUsers=[]
-
+  const { onlineUsers}= useAuthStore()
 
     useEffect(()=>{
         getUsers()
