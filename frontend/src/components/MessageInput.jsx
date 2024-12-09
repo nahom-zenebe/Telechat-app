@@ -1,12 +1,17 @@
 
 import React, { useRef, useState } from 'react'
 import toast from 'react-hot-toast'
+import { X } from "lucide-react";
+import { useChartStore } from '../store/useChartStore'
+
+import {Send } from "lucide-react";
+import {Image } from "lucide-react";
 
 function MessageInput() {
   const[text,setText]=useState("")
   const[imagePreview,setimagePreview]=useState(null)
   const fileInputRef=useRef(null)
-  const {sendMessage}=seChartStore()
+  const {sendMessage}=useChartStore()
 
 const handleImage=(e)=>{
   const file=e.target.files[0]
@@ -85,7 +90,7 @@ const handleSendMessage=async(e)=>{
             accept="image/*"
             className="hidden"
             ref={fileInputRef}
-            onChange={handleImageChange}
+            onChange={handleImage}
           />
 
           <button

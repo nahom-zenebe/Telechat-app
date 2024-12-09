@@ -9,8 +9,8 @@ const AuthImagePattern = ({ title, subtitle }) => {
                 key={i}
                 className={`aspect-square rounded-2xl ${
                   i % 2 === 0
-                    ? "bg-blue-400 animate-pulse" // Color for animated squares
-                    : "bg-primary/10" // Default color for others
+                    ? "bg-blue-400 animate-pulse" 
+                    : "bg-primary/10" 
                 }`}
               />
             ))}

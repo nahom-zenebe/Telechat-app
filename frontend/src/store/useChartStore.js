@@ -2,6 +2,7 @@ import {create} from 'zustand'
 import {axiosInstance} from '../lib/axios.js'
 import toast from "react-hot-toast"
 import axios from 'axios'
+ 
 
 
 
@@ -10,7 +11,7 @@ message:[],
 users:[],
 selectedUser:null,
 isUserLoading:false,
-isMessageLoading:false,
+isMessagesLoading:false,
 
 getUsers:async()=>{
     set({isUserLoading:true})
@@ -29,7 +30,7 @@ getUsers:async()=>{
     }
 },
 getMessage:async(userId)=>{
-    set({isMessageLoading:true})
+    set({isMessagesLoading:true})
     try {
         const res=await axiosInstance.get(`/message/${userId}`)
           set({message:res.data})
@@ -38,7 +39,7 @@ getMessage:async(userId)=>{
         
     }
     finally{
-        set({isMessageLoading:false})
+        set({isMessagesLoading:false})
     }
 },
 
@@ -46,7 +47,7 @@ sendMessage:async(messageData)=>{
     const {selectedUser,messages}=get()
 
     try {
-        const res=await axiosInstance.post(`/message/send/${selectedUser._id}`,messageData)
+        const res=await axiosInstance.post(`message/send/${selectedUser._id}`,messageData)
         set({messages:[...messages,res.data]})
         
     } catch (error) {
