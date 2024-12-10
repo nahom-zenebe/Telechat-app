@@ -49,7 +49,7 @@ module.exports.sendMessage=async(req,res)=>{
 
     try {
         const { text, image } = req.body;
-        const { id: receiverId } = req.params;
+        const { id:  recieverId } = req.params;
         const senderId = req.user._id;
     
         let imageUrl='';
@@ -61,9 +61,9 @@ module.exports.sendMessage=async(req,res)=>{
 
         const newMessage=new Message({
             senderId,
-            receiverId,
+            recieverId,
             text,
-            image: importUrl
+            image:imageUrl
         })
 
         await newMessage.save()
