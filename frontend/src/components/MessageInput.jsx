@@ -9,58 +9,55 @@ import {Image } from "lucide-react";
 
 function MessageInput() {
   const[text,setText]=useState("")
-  const[imagePreview,setimagePreview]=useState(null)
+  const[ImagePreview,setImagePreview]=useState(null)
   const fileInputRef=useRef(null)
   const {sendMessage}=useChartStore()
 
-const handleImage=(e)=>{
+const handleImageChange=(e)=>{
   const file=e.target.files[0]
-  if(!file.type.startsWith("image/")){
-    toast.error("Please select an image file")
+  if (!file.type.startsWith("image/")) {
+    toast.error("Please select an image file");
     return;
   }
-  const reader=new FileReader()
-  reader.onloadend=()=>{
-    setimagePreview(reader.result)
-
-  }
-  reader.readAsDataURL(file)
+  const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result);
+    };
+    reader.readAsDataURL(file);
 
 
 }
 const removeImage=(e)=>{
-  setimagePreview(null)
+  setImagePreview(null)
   if(fileInputRef.current)fileInputRef.current.value=""
 
 }
 const handleSendMessage=async(e)=>{
-  e.preventDefault()
-  if(!text.trim() && !imagePreview)return
-  try {
-    await sendMessage({
-      text:text.trim(),
-      image:imagePreview
-    })
-    setText("")
-    setimagePreview(null)
-    if(fileInputRef.current)fileInputRef.current.value=""
+  e.preventDefault();
+    if (!text.trim() && !ImagePreview) return;
 
+    try {
+      await sendMessage({
+        text: text.trim(),
+        image: ImagePreview,
+      });
 
-  } catch (error) {
-    console.error("Failed to send Message",error)
     
-  }
-
-}
-
+      setText("");
+      setImagePreview(null);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    } catch (error) {
+      console.error("Failed to send message:", error);
+    }
+  };
 
   return (
     <div className='p-4 w-full'>
-            {imagePreview && (
+            {ImagePreview && (
         <div className="mb-3 flex items-center gap-2">
           <div className="relative">
             <img
-              src={imagePreview}
+              src={ImagePreview}
               alt="Preview"
               className="w-20 h-20 object-cover rounded-lg border border-zinc-700"
             />
@@ -90,13 +87,13 @@ const handleSendMessage=async(e)=>{
             accept="image/*"
             className="hidden"
             ref={fileInputRef}
-            onChange={handleImage}
+            onChange={handleImageChange}
           />
 
           <button
             type="button"
             className={`hidden sm:flex btn btn-circle
-                     ${imagePreview ? "text-emerald-500" : "text-zinc-400"}`}
+                     ${ImagePreview ? "text-emerald-500" : "text-zinc-400"}`}
             onClick={() => fileInputRef.current?.click()}
           >
             <Image size={20} />
@@ -105,7 +102,7 @@ const handleSendMessage=async(e)=>{
         <button
           type="submit"
           className="btn btn-sm btn-circle"
-          disabled={!text.trim() && !imagePreview}
+          disabled={!text.trim() && !ImagePreview}
         >
           <Send size={22} />
         </button>

@@ -18,22 +18,20 @@ module.exports.getMessages=async(req,res)=>{
  
 
     try {
-        const {id:userToChatId}=req.params
-        const myId=req.user._id
+        
+      
 
          
-    const senderId = mongoose.Types.ObjectId(myId);
-    const receiverId = mongoose.Types.ObjectId(userToChatId);
-    console.log(senderId)
-    console.log( receiverId)
+        const { id: userToChatId } = req.params;
+        const myId = req.user._id;
   
 
-        const messages=await Message.find({
-            $or: [
-                { senderId, receiverId },
-                { senderId: receiverId, receiverId: senderId }
-              ]
-        })
+         const messages = await Message.find({
+      $or: [
+        { senderId: myId, receiverId: userToChatId },
+        { senderId: userToChatId, receiverId: myId },
+      ],
+    });
 
         res.status(200).json(messages)
        
@@ -50,21 +48,20 @@ module.exports.sendMessage=async(req,res)=>{
 
 
     try {
-        const {text,image}=req.body
-        const {id:recieverId}=req.params
-        const senderId=req.user._id
-
-
-        let imageUrl;
-        if(image){
-            const uploadResponse=await cloudinary.uploader.upload(image)
-            imageUrl=uploadResponse.secure_url
+        const { text, image } = req.body;
+        const { id: receiverId } = req.params;
+        const senderId = req.user._id;
+    
+        let imageUrl='';
+        if (image) {
+          
+          const uploadResponse = await cloudinary.uploader.upload(image);
+          imageUrl= uploadResponse.secure_url;
         }
-
 
         const newMessage=new Message({
             senderId,
-            recieverId,
+            receiverId,
             text,
             image: importUrl
         })
