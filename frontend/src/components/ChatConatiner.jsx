@@ -5,7 +5,7 @@ import ChatHeader from '../components/ChatHeader'
 import MessageSkeleton from '../components/skeletons/MessageSkeleton'
 import { useAuthStore } from "../store/useAuthStore";
 import { formatMessageTime } from "../lib/utilis";
-
+import avator from '../public/avatar.png'
 const ChatConatiner=()=> {
   const{message,getMessage,isMessagesLoading,selectedUser}=useChartStore()
   const { authUser } = useAuthStore();
@@ -45,8 +45,8 @@ const ChatConatiner=()=> {
                 <img
                   src={
                     message.senderId === authUser._id
-                      ? authUser.profilePic || "/avatar.png"
-                      : selectedUser.profilePic || "/avatar.png"
+                      ? authUser.profilePic || avator
+                      : selectedUser.profilePic ||avator
                   }
                   alt="profile pic"
                 />

@@ -3,6 +3,7 @@ import { useAuthStore } from '../store/useAuthStore'
 import {Camera } from 'lucide-react'
 import { Mail } from 'lucide-react'
 import { User } from 'lucide-react'
+import avator from '../public/avatar.png'
 
 function ProfilePage() {
   const { authUser,isUpdatingProfile,updateProfile}=useAuthStore()
@@ -47,7 +48,7 @@ const [selectedImg,setselectedImg]=useState(null)
         <div className="flex flex-col items-center gap-4">
           <div className="relative">
             <img
-              src={selectedImg || authUser.profilePic || "/avatar.png"}
+              src={selectedImg || authUser.profilePic || avator}
               alt="Profile"
               className="size-32 rounded-full object-cover border-4 "
             />

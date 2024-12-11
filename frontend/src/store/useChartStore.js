@@ -44,11 +44,11 @@ getMessage:async(userId)=>{
 },
 
 sendMessage:async(messageData)=>{
-    const {selectedUser,messages}=get()
+    const {selectedUser,message}=get()
 
     try {
         const res=await axiosInstance.post(`/message/send/${selectedUser._id}`,messageData)
-        set({messages:[...messages,res.data]})
+        set({message:[...message,res.data]})
         
     } catch (error) {
         toast.error(error.response.data.message)
