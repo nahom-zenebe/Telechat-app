@@ -7,7 +7,7 @@ import { useAuthStore } from "../store/useAuthStore";
 import { formatMessageTime } from "../lib/utilis";
 import avator from '../public/avatar.png'
 const ChatConatiner=()=> {
-  const{message,getMessage,isMessagesLoading,selectedUser}=useChartStore()
+  const{message,getMessage,isMessagesLoading,selectedUser,subscribeToMessage,unsubscribeFromMessage}=useChartStore()
   const { authUser } = useAuthStore();
   const messageEndRef = useRef(null);
 
@@ -16,6 +16,8 @@ const ChatConatiner=()=> {
   useEffect(()=>{
 
     getMessage(selectedUser._id)
+    subscribeToMessage()
+    return ()=>unsubscribeFromMessage
   },[selectedUser._id,getMessage])
 
 
